@@ -12,6 +12,7 @@ def auto_enroll_dialog(subject_code):
     if not res.data:
         st.error('subject code not found!')
         if st.button('Close'):
+            st.session_state.pop('pending_join_code', None)
             st.query_params.clear()
             st.rerun()
         return
@@ -23,6 +24,7 @@ def auto_enroll_dialog(subject_code):
         st.info('Youre already enrolled!')
 
         if st.button('Got it!'):
+            st.session_state.pop('pending_join_code', None)
             st.query_params.clear()
             st.rerun()
 
@@ -33,6 +35,7 @@ def auto_enroll_dialog(subject_code):
 
     with col1:
         if st.button('No Thanks'):
+            st.session_state.pop('pending_join_code', None)
             st.query_params.clear()
 
             st.rerun()
@@ -40,6 +43,7 @@ def auto_enroll_dialog(subject_code):
         if st.button("Yes enroll now!",type='primary',width='stretch'):
             enroll_student_to_subject(student_id,subject['subject_id'])
             st.success('Joined successfully!')
+            st.session_state.pop('pending_join_code', None)
             st.query_params.clear()
             time.sleep(2)
             st.rerun()

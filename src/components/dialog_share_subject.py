@@ -4,7 +4,7 @@ import io
 
 @st.dialog('Share "Subject Enrollment" Link')
 def share_subject_dialog(subject_name, subject_code):
-    app_domain = "Snapclass.streamlit.app"
+    app_domain = "snapclass.streamlit.app"
     enroll_link = f"{app_domain}?join-code={subject_code}"
 
     st.header("Scan to Join")

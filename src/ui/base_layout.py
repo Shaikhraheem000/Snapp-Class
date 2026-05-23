@@ -46,7 +46,7 @@ def style_base_layout():
                 font-size: 1.5rem !important;
                 line-height: 1.1 !important;
                 margin-bottom: 0 !important;
-                color: #E0E3FF !important;
+                color: #2B2D42 !important;
             }
 
             h2 {
@@ -54,10 +54,28 @@ def style_base_layout():
                 font-size: 1.5rem !important;
                 line-height: 0.9 !important;
                 margin-bottom: 0 !important;
+                color: #2B2D42 !important;
             }
 
             h3, h4, p {
                 font-family: 'Outfit', sans-serif !important;
+                color: #1E293B !important;
+            }
+
+            label, .stMarkdown, .stTextInput label, .stSelectbox label, .stFileUploader label {
+                color: #1E293B !important;
+                font-family: 'Outfit', sans-serif !important;
+            }
+
+            input, textarea, div[data-baseweb="input"], div[data-baseweb="select"] > div {
+                background-color: #F8FAFC !important;
+                color: #1E293B !important;
+                border-color: #CBD5E1 !important;
+            }
+
+            input::placeholder, textarea::placeholder {
+                color: #64748B !important;
+                opacity: 1 !important;
             }
 
             button {
