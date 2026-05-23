@@ -93,7 +93,7 @@ def teacher_dashboard():
 
 def teacher_tab_take_attendance():
     teacher_id = st.session_state.teacher_data['teacher_id']
-    st.header('Take AI Attendance')
+    st.header('Take Attendance')
 
 
     if 'attendance_images' not in st.session_state:
@@ -158,6 +158,7 @@ def teacher_tab_take_attendance():
 
                 if not enrolled_students:
                     st.warning('No students enrolled in this course')
+                    return 
                 else:
 
                     results, attendance_to_log  = [], []
@@ -201,36 +202,41 @@ def teacher_tab_take_attendance():
 
 
 def teacher_tab_manage_subjects():
-    teacher_id = st.session_state.teacher_data['teacher_id']
+    teacher_id = st.session_state.teacher_data["teacher_id"]
+
     col1, col2 = st.columns(2)
     with col1:
-        st.header('Manage Subjects', width='stretch')
+        st.header("Manage Subjects", width="stretch")
 
     with col2:
-        if st.button('Create New Subject', width='stretch'):
+        if st.button("Create New Subject", width="stretch"):
             create_subject_dialog(teacher_id)
 
-
-    # LIST all SUBJECTS
     subjects = get_teacher_subjects(teacher_id)
+
     if subjects:
         for sub in subjects:
             stats = [
-                ("🫂", "Students", sub['total_students']),
-                ("🕰️", "Classes", sub['total_classes']),
+                ("👥", "Students", sub["total_students"]),
+                ("⏱️", "Classes", sub["total_classes"]),
             ]
-        def share_btn():
-            if st.button(f"Share Code: {sub['name']}", key=f"share_{sub['subject_code']}", icon=":material/share:"):
-                share_subject_dialog(sub['name'], sub['subject_code'])
-            st.space()
 
-        subject_card(
-            name = sub['name'],
-            code = sub['subject_code'],
-            section = sub['section'],
-            stats=stats,
-            footer_callback=share_btn
-        )
+            def share_btn(sub=sub):
+                if st.button(
+                    f"Share Code: {sub['name']}",
+                    key=f"share_{sub['subject_id']}",
+                    icon=":material/share:",
+                ):
+                    share_subject_dialog(sub["name"], sub["subject_code"])
+                st.space()
+
+            subject_card(
+                name=sub["name"],
+                code=sub["subject_code"],
+                section=sub["section"],
+                stats=stats,
+                footer_callback=share_btn,
+            )
     else:
         st.info("NO SUBJECTS FOUND. CREATE ONE ABOVE")
 
@@ -312,7 +318,7 @@ def teacher_screen_login():
     st.space()
 
 
-    teacher_username = st.text_input("Enter username", placeholder='ananyaroy')
+    teacher_username = st.text_input("Enter username", placeholder='E.g. example@03')
 
     teacher_pass = st.text_input("Enter password", type='password', placeholder="Enter password")
 
@@ -328,7 +334,7 @@ def teacher_screen_login():
                 time.sleep(1)
                 st.rerun()
             else:
-                st.error("Invalid username and password combo")
+                st.error("Invalid username and password combination")
 
     with btnc2:
         if st.button('Register Instead', type="primary", icon=':material/passkey:', width='stretch'):
@@ -370,13 +376,13 @@ def teacher_screen_register():
     st.space()
 
     
-    teacher_username = st.text_input("Enter username", placeholder='ananyaroy')
+    teacher_username = st.text_input("Enter username", placeholder='example@03')
 
-    teacher_name = st.text_input("Enter name", placeholder='Ananya Roy')
+    teacher_name = st.text_input("Enter name", placeholder='E.g: Alex Johnson')
 
     teacher_pass = st.text_input("Enter password", type='password', placeholder="Enter password")
 
-    teacher_pass_confirm = st.text_input("Confirm your password", type='password', placeholder="Enter password")
+    teacher_pass_confirm = st.text_input("Confirm your password", type='password', placeholder="Confirm password")
 
     st.divider()
 

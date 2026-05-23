@@ -41,7 +41,7 @@ def student_dashboard():
     st.divider()
 
 
-    with st.spinner('Loading your enrolled subjects..'):
+    with st.spinner('Loading youre subjects..'):
         subjects = get_student_subjects(student_id)
         logs = get_student_attendance(student_id)
 
@@ -66,10 +66,10 @@ def student_dashboard():
 
 
         stats = stats_map.get(sid,{"total":0, "attended": 0} )
-        def unenroll_button():
-                if st.button("Unenroll from tihs course", type='tertiary', width='stretch', icon=':material/delete_forever:'):
+        def unenroll_button(sid=sid, subject_name=sub["name"]):
+                if st.button("Unenroll from this course", type='tertiary', width='stretch', icon=':material/delete_forever:', key=f"unenroll_{sid}"):
                     unenroll_student_to_subject(student_id, sid)
-                    st.toast(f'Unenrolled from {sub['name']} successfully!')
+                    st.toast(f"Unenrolled from {subject_name} successfully!")
                     st.rerun()
 
         with cols[i % 2]:
@@ -142,7 +142,7 @@ def student_screen():
     if show_registration:
         with st.container(border=True):
             st.header('Register new Profile')
-            new_name = st.text_input("Enter your name", placeholder='E.g. Hamza Rizvi')
+            new_name = st.text_input("Enter your name", placeholder='E.g.Alex Johnson')
 
             st.subheader('Optional : Voice Enrollment')
             st.info("Enroll your for voice only attendance")
@@ -151,7 +151,7 @@ def student_screen():
             audio_data = None
 
             try:
-                audio_data = st.audio_input('Record a short phrase like I am present, My name is Akash.')
+                audio_data = st.audio_input('Record a short phrase like "I am present" to create your voice profile')
             except Exception:
                 st.error('Audio Data failed!')
 

@@ -17,6 +17,9 @@ def voice_attendance_dialog(selected_subject_id):
     audio_data = None
 
     audio_data = st.audio_input("Record classroom audio")
+    if not audio_data:
+        st.warning("Please record audio first")
+        return
 
     if st.button('Analyze Audio', width='stretch', type='primary'):
         with st.spinner('Prcessing Audio data'):
@@ -36,7 +39,7 @@ def voice_attendance_dialog(selected_subject_id):
                 return
             
             audio_bytes = audio_data.read()
-
+            
             detected_scores = process_bulk_audio(audio_bytes, candidates_dict)
 
             results, attendance_to_log  = [], []
@@ -68,4 +71,3 @@ def voice_attendance_dialog(selected_subject_id):
         st.divider()
         df_results, logs = st.session_state.voice_attendance_results
         show_attendance_result(df_results, logs)
-

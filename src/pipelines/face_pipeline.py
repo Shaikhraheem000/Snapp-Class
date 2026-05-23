@@ -61,8 +61,9 @@ def get_trained_model():
 
     try:
         clf.fit(X, y)
-    except ValueError:
-        pass
+    except ValueError as e:
+        st.error(f"Training failed: {e}")
+        return None
 
     return {'clf': clf, 'X':X, "y":y}
 
@@ -104,4 +105,3 @@ def predict_attendance(class_image_np):
         if best_match_score <= resemblance_threshold:
             detected_student[predicted_id] = True
     return detected_student, all_students, len(encodings)
-

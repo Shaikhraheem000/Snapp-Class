@@ -22,7 +22,7 @@ def show_attendance_result(df, logs):
         if st.button('Confirm & Save', width='stretch', type='primary'):
             try:
                 create_attendance(logs)
-                st.toast("Attendance taken")
+                st.toast("Attendance taken successfully!")
                 st.session_state.attendance_images = []
                 st.session_state.voice_attendance_results = None
                 st.rerun()
@@ -34,5 +34,4 @@ def show_attendance_result(df, logs):
 @st.dialog("Attendance Reports")
 def attendance_result_dialog(df, logs):
     show_attendance_result(df, logs)
-
 
