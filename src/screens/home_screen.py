@@ -13,7 +13,7 @@ def home_screen():
     col1, col2 = st.columns(2, gap="large")
     with col1:
         st.header("I'm Student")
-        st.image("https://i.ibb.co/844D9Lrt/mascot-student.png", width=120)
+        st.image("https://i.ibb.co/844D9Lrt/mascot-student.png", width=130)
         if st.button(
             "Student Portal",
             type="primary",
