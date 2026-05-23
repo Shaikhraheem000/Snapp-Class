@@ -84,7 +84,6 @@ def student_dashboard():
 def student_screen():
     style_background_dashboard()
     style_base_layout()
-    show_registration=False
 
     if "student_data" in st.session_state:
         student_dashboard()
@@ -100,6 +99,7 @@ def student_screen():
     st.header('Login Using FaceID',text_alignment='center')
     st.space()
     st.space()
+    show_registration=False
     photo_source = st.camera_input("Position your face in the center")
 
     if photo_source:
@@ -143,6 +143,8 @@ def student_screen():
                    audio_data = st.audio_input('Record a short phrase like I am recording this audio for Attendence purpose')
                except Exception:
                    st.error('Audio data failed!')
+
+                   
                if st.button("Create Account",type='primary'):
                    if new_name:
                        with st.spinner('creating profile...'):
