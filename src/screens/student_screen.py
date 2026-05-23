@@ -136,7 +136,7 @@ def student_screen():
                st.subheader('Optional:Voice Enrollment')
                st.info('Enroll your voice only attendance ')
 
-
+ 
                audio_data =None
 
                try:
